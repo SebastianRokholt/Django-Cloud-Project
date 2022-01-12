@@ -117,7 +117,7 @@ class Question(models.Model):
 
 class Choice(models.Model):
     # Many-To-Many relationship with Question
-    question = models.ManyToManyField(Question)
+    question = models.ForeignKey(Question, models.SET_NULL,null=True)
     # Choice content / text
     choice_text = models.CharField(null=False, max_length=50)
     # Indicates whether the choice is correct or not
@@ -133,3 +133,8 @@ class Submission(models.Model):
    # One choice could belong to multiple submissions 
    # and one submission could have multiple choices
    choices = models.ManyToManyField(Choice) 
+   # Optional attributes
+   user = models.CharField(null=True,max_length=100) 
+   date_submitted  = models.DateField(default=now, editable=False)  
+   time = models.TimeField(default=now, editable=False)
+   lesson_id = models.IntegerField(null=True)
