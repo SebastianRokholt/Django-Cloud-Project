@@ -103,8 +103,8 @@ class Enrollment(models.Model):
 class Question(models.Model):
     # One-To-Many relationship to Course
     courses = models.ManyToManyField(Course)
-    # Foreign key to lesson
-    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=False)
+    # Foreign key to lesson (REMOVED as I wanted to relate questions directly with courses, see task caption)
+    # lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=False)
     # question text
     question_text = models.CharField(max_length=500, default="This is a sample question.")
     # question grade/mark

@@ -27,7 +27,7 @@ SECRET_KEY = config("SECRET_KEY")
 DEBUG = True
 
 # <HINT> add your cloud host here
-ALLOWED_HOSTS = ['sebastianrok.eu-de.mybluemix.net']
+ALLOWED_HOSTS = ['sebastianrok.eu-de.mybluemix.net', 'localhost']
 
 
 # Application definition
