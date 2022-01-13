@@ -110,8 +110,8 @@ class Question(models.Model):
     # question grade/mark
     marks = models.FloatField(default=1.0)
 
-    # A sample model method to calculate if learner scored points by answering correctly
-    def is_get_score(self, selected_ids):
+    # A model method to calculate if learner scored points by answering correctly
+    def answered_correctly(self, selected_ids):
        all_answers = self.choice_set.filter(is_correct=True).count()
        selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
        if all_answers == selected_correct:
@@ -146,4 +146,4 @@ class Submission(models.Model):
 
     def __str__(self):
         return f"Submission posted on {self.date_submitted} at {self.time} \
-                for enrollment {self.enrollment}"
+                for {self.enrollment}"
