@@ -6,6 +6,6 @@
     buildpack: python_buildpack
   - name: onlinecourse-nginx
     routes:
-      - route: sebastianrok.eu-de.cf.appdomain.cloud/static
+      - route: sebastianrok.eu-de.mybluemix.net/static
     memory: 128M
     buildpack: staticfile_buildpack
