@@ -1,21 +1,21 @@
 from django.contrib import admin
-from .models import Course, Lesson, Instructor, Learner, Question, Choice, Submission
+from .models import Course, Lesson, Instructor, Learner
+from .models import Question, Choice, Submission, Enrollment
 
 
-# Register your models here.
 class QuestionInline(admin.StackedInline):
     model = Question
-    extra = 5
+    extra = 1
 
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
-    extra = 5
+    extra = 2
 
 
 class LessonInline(admin.StackedInline):
     model = Lesson
-    extra = 5
+    extra = 2
 
 
 class CourseAdmin(admin.ModelAdmin):
@@ -26,22 +26,23 @@ class CourseAdmin(admin.ModelAdmin):
 
 
 class LessonAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['title', 'content']
+    inlines = [QuestionInline]
+
+class EnrollmentAdmin(admin.ModelAdmin):
+    list_display = ['user', 'course', 'date_enrolled', 'mode', 'rating']
 
 
-# Question and Choice (Submission) models
+# Question and Choice models
 class QuestionAdmin(admin.ModelAdmin):
     list_display = ['question_text']
     inlines = [ChoiceInline]
 
-class SubmissionAdmin(admin.ModelAdmin):
-    list_display = ['user','lesson_id','date_submitted','time']
-    date_hierarchy = 'date_submitted'
 
-
+# Registering models for admin site
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Lesson, LessonAdmin)
 admin.site.register(Instructor)
 admin.site.register(Learner)
+admin.site.register(Enrollment, EnrollmentAdmin)
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Submission, SubmissionAdmin)
